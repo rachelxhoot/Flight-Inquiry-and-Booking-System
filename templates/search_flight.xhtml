@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>flight</title>
+    <style type="text/css">
+    body{
+        background-color:lightblue;
+    }
+.divForm{
+    margin-top: 100px;
+    background-color: aliceblue;
+position: absolute;/*绝对定位*/
+
+border: 3px solid cadetblue;
+text-align: center;/*(让div中的内容居中)*/
+
+
+
+font-size: 13px;
+color: darkgray;
+line-height:50px
+}
+
+    .div {
+        margin-top: 30px;
+    display: inline-block;
+    padding: .3em .5em;
+    background-image: linear-gradient(#ddd, #bbb);
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3em;
+    box-shadow: 0 1px white inset;
+    text-align: center;
+    text-shadow: 0 1px 1px black;
+    color:white;
+    font-weight: bold;
+
+}
+
+.div:active{
+    box-shadow: .05em .1em .2em rgba(0,0,0,.6) inset;
+    border-color: rgba(0,0,0,.3);
+    background: #bbb;
+}
+</style>
+
+</head>
+<body>
+<form style="margin: 0px auto" action="flight.xhtml" method="post"> {% csrf_token %}
+        <label>出发地点</label>
+        <input name="b_departure"/>
+        <label>到达地点</label>
+        <input name="b_destination"/>
+        <input class="div" type="submit" value="搜索"/>
+        <div></div>
+    </form>
+<table class="divForm" border="1">
+    <thead>
+    <tr>
+        <td>航班号</td>
+        <td>出发点</td>
+        <td>到达点</td>
+        <td>起飞时间</td>
+        <td>飞行时间</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for flight in flight_list %}
+        <tr>
+            <td>{{ flight.flight_id }}</td>
+            <td>{{ flight.departure_id}}</td>
+            <td>{{ flight.destination_id }}</td>
+            <td>{{ flight.departure_time }}</td>
+            <td>{{ flight.time_of_flight }}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+</body>
+</html>

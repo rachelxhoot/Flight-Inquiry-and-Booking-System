@@ -1,0 +1,70 @@
+{#<?xml version="1.0" encoding="UTF-8"?>#}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>航班值机系统</title>
+<!-- Custom Theme files -->
+<link href="static/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<!--Google Fonts-->
+<link href='http://fonts.useso.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<!--Google Fonts-->
+</head>
+{% if messages %}
+<script>
+    {% for msg in messages %}
+        alert('{{ msg.message }}');
+    {% endfor %}
+</script>
+{% endif %}
+<body>
+<div class="login">
+<h2>航班值机系统</h2>
+<div class="search-top">
+<form action="seat.xhtml" method="post"> {% csrf_token %}
+        <input style="margin-left: 150px" type="text" value="航班号" onfocus="this.value = '';" name="d_flight_id"/>
+        <input type="submit" value="搜索"/>
+        <div></div>
+</form>
+</div>
+<table border="1">
+    <thead>
+    <tr>
+        <td>座位号</td>
+        <td>类型</td>
+        <td>状态</td>
+        <td>乘客身份证号</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for seat in seat_search %}
+        <tr>
+            <td>{{ seat.seat_id }}</td>
+            <td>{{ seat.type}}</td>
+            <td>{{ seat.state }}</td>
+            <td>{{ seat.passenger_id }}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+<div style="margin-top: 50px;width: 800px;margin-left: -150px" class="search-top">
+<form action="seat.xhtml" method="post"> {% csrf_token %}
+        <input style="margin-left: 25px" type="text" value="航班号" onfocus="this.value = '';" name="d1_flight_id"/>
+        <input type="text" value="座位号" onfocus="this.value = '';" name="d_sid"/>
+        <input type="text" value="身份证号" onfocus="this.value = '';" name="d_pid"/>
+        <input type="submit" value="值机"/>
+        <div></div>
+</form>
+</div>
+<div>
+            <a class="div" style="margin-left: 250px" type="submit" href="index.xhtml">返回</a>
+</div>
+</div>
+</body>
+</html>

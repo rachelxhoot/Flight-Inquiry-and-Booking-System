@@ -1,0 +1,44 @@
+{#<?xml version="1.0" encoding="UTF-8"?>#}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>航班信息系统注册</title>
+<!-- Custom Theme files -->
+<link href="static/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<!--Google Fonts-->
+<link href='http://fonts.useso.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<!--Google Fonts-->
+</head>
+{# 必须有这个#}
+{% if messages %}
+<script>
+    {% for msg in messages %}
+        alert('{{ msg.message }}');
+    {% endfor %}
+</script>
+{% endif %}
+
+<body>
+<div class="login">
+        <h2>用户注册</h2>
+    <div class="login-top">
+    <form action="register.xhtml" method="post"> {% csrf_token %}
+        <input type="text" value="身份证号" onfocus="this.value = '';" name="a_card_id"/>
+        <div></div>
+        <input type="text" value="用户类型" onfocus="this.value = '';" name="a_user_type"/>
+        <div></div>
+        <input type="password" value="航班号" onfocus="this.value = '';" name="a_password"/>
+        <div class="forgot">
+        <input type="submit" value="注册"/>
+            <a  type="submit" href="index.xhtml">返回登录界面</a>
+        </div>
+    </form>
+
+</body>
+</html>

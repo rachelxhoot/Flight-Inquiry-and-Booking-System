@@ -1,0 +1,109 @@
+{#<?xml version="1.0" encoding="UTF-8"?>#}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>航班购买</title>
+<!-- Custom Theme files -->
+<link href="static/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<!--Google Fonts-->
+<link href='http://fonts.useso.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<!--Google Fonts-->
+</head>
+{% if messages %}
+<script>
+    {% for msg in messages %}
+        alert('{{ msg.message }}');
+    {% endfor %}
+</script>
+{% endif %}
+<body>
+<div class="login">
+<h2>航班查询与订购</h2>
+<div class="search-top">
+<form action="buy_flight.xhtml" method="post"> {% csrf_token %}
+        <input style="margin-left: 150px" type="text" value="航班号" onfocus="this.value = '';" name="c_flight_id"/>
+        <input type="submit" value="搜索"/>
+        <div></div>
+</form>
+</div>
+<table border="1">
+    {% for flight in flight_this %}
+    <thead>
+    <tr>
+        <td>航班号</td>
+        <td>出发点</td>
+        <td>到达点</td>
+        <td>起飞时间</td>
+        <td>飞行时间</td>
+        <td>航班类型</td>
+        <td>出发航站楼</td>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ flight.flight_id }}</td>
+            <td>{{ flight.departure_id}}</td>
+            <td>{{ flight.destination_id }}</td>
+            <td>{{ flight.departure_time }}</td>
+            <td>{{ flight.time_of_flight }}</td>
+            <td>{{ flight.air_type }}</td>
+            <td>{{ flight.terminal }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+<h2 style="font-size: 20px;width: 1500px;margin-left: -500px">剩余头等舱座位：{{num_A}}个;剩余商务舱座位：{{num_B}}个;剩余经济舱座位：{{num_C}}个</h2>
+    <div></div>
+<h2 style="font-size: 20px">当前可以选择的飞行方案如下：</h2>
+
+<table  style="margin-top: -30px" border="1">'
+<thead>
+    <tr>
+        <td>最大行李托运重量(kg)</td>
+        <td>所需机票费用</td>
+        <td>座位类型</td>
+    </tr>
+    </thead>
+    {% for plan_this in plan %}
+
+    <tbody>
+        <tr>
+            <td>{{ plan_this.max_check }}</td>
+{#            # Django中乘法的使用#}
+            <td>{% widthratio plan_this.charge 1 time_a %}</td>
+            <td>{{ plan_this.seat_type }}</td>
+
+
+        </tr>
+         </tbody>
+{% endfor %}
+
+</table>
+<div class="search-top" style="width: 650px;margin-top: 30px;margin-left: -50px">
+<form action="buy_flight.xhtml" method="post"> {% csrf_token %}
+        <input  type="text" value="航班号" onfocus="this.value = '';" name="cc_flight_id"/>
+        <input  type="text" value="乘客身份证号" onfocus="this.value = '';" name="c_pid"/>
+
+    <select class="div" name="select_planid">
+        <option value="001">方案一</option>
+        <option value="002">方案二</option>
+        <option value="003">方案三</option>
+        </select>
+        <input type="submit" value="购买"/>
+        <div></div>
+</form>
+    </div>
+<div>
+            <a class="div" style="margin-left: 250px" type="submit" href="flight.xhtml">返回</a>
+</div>
+</div>
+
+</body>
+</html>
